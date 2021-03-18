@@ -3,7 +3,7 @@
 Commands to install app -
 
 ```
-$ bench get-app fedex_integration https://github.com/indictranstech/fedex_integration.git
+$ bench get-app fedex_integration https://github.com/vaibhav007-droid/fedex_integration.git
 $ bench install-app fedex_integration
 $ bench migrate
 
