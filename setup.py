@@ -3,10 +3,12 @@ from setuptools import setup, find_packages
 # from pip.req import parse_requirements
 import re, ast
 
-try: # for pip >= 10
-    from pip._internal.req import parse_requirements
-except ImportError: # for pip <= 9.0.3
-    from pip.req import parse_requirements
+# Generator must be converted to list, or we will only have one chance to read each element, meaning that the first requirement will be skipped.
+requirements = list(requirements) 
+try:
+    requirements = [str(ir.req) for ir in install_reqs]
+except:
+    requirements = [str(ir.requirement) for ir in install_reqs]
 
 # get version from __version__ variable in fedex_integration/__init__.py
 _version_re = re.compile(r'__version__\s+=\s+(.*)')
