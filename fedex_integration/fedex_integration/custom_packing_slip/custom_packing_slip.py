@@ -106,7 +106,7 @@ def validate_postal_code(doc, method):
 		fedex = FedexController(doc.shipment_forwarder)
 		try:
 			fedex.validate_postal_address(doc.shipping_address_name)
-		except Exception,e:
+		except Exception as e:
 			frappe.throw(cstr(e))
 
 
@@ -117,7 +117,7 @@ def schedule_pickup(request_data):
 	try:
 		response = fedex.schedule_pickup(request_data)
 		return response
-	except Exception,e:
+	except Exception as e:
 		frappe.throw(cstr(e))
 
 
@@ -127,8 +127,8 @@ def get_fedex_shipment_rate(doc, method):
 		try:
 			rate_request = fedex.get_shipment_rate(doc)
 			set_shipment_rate(doc, rate_request)
-		except Exception,e:
-			print "traceback__________", frappe.get_traceback()
+		except Exception as e:
+			# print "traceback__________", frappe.get_traceback()
 			frappe.throw(cstr(e))
 
 def set_shipment_rate(doc, rate_request):
@@ -216,5 +216,4 @@ def validate_for_email_notification(doc):
 							in FedEx Notification table in row {0}".format(row.idx)))
 		if row.notify_to in ["Other-1", "Other-2", "Other-3"] and not row.email_id:
 			frappe.throw(_("For FedEx Notification table, Please enter email id in row {0}.".format(row.idx)))
-
 
